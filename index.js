@@ -95,7 +95,7 @@ app.post("/items", async (req, res) => {
   
       res.send(result[0]).end();
     } catch (err) {
-      res.status(500).send(err).end(); // ir 400, ir 500 tinkamas
+      res.status(500).send(err).end(); 
       return console.error(err);
     }
   });
