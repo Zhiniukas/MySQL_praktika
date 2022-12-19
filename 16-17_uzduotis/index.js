@@ -16,17 +16,33 @@ const MYSQL_CONFIG =
   database: process.env.database,
 };
 
-app.get("/items", async (req, res) => {
-    const  lenght = req.query.lenght;
+app.get("/cars", async (_, res) => {
 
- let cleanlenght=5; //default SELECT query lenght
+  try {
+    const con = await mysql.createConnection(MYSQL_CONFIG);
 
- if (lenght) cleanlenght = +mysql.escape(lenght).replaceAll("'","")
-  
-    if ( cleanlenght < 0 || Number.isNaN(cleanlenght) || typeof cleanlenght !== "number") {
+    const result = await con.execute(
+      `SELECT * FROM cars;`
+    );
+     
+    await con.end();
+
+    res.send(result[0]).end();
+  } catch (err) {
+    res.status(500).send(err).end(); 
+    return console.error(err);
+  }
+});
+
+app.get("/cars/:id", async (req, res) => {
+    const  id = req.params.id;
+
+if (id)  cleanId = +mysql.escape(id).replaceAll("'","")
+
+    if ( cleanId < 0 || Number.isNaN(cleanId) || typeof cleanId !== "number") {
       return res
         .status(400)
-        .send(`Incorrect query lenght provided: ${lenght}`)
+        .send(`Incorrect car ID provided: ${id}`)
         .end();
     }
 
@@ -34,7 +50,7 @@ app.get("/items", async (req, res) => {
       const con = await mysql.createConnection(MYSQL_CONFIG);
   
       const result = await con.execute(
-        `SELECT * FROM items LIMIT ${cleanlenght}`
+        `SELECT * FROM cars WHERE id = ${cleanId}`
       );
        
       await con.end();
@@ -46,14 +62,21 @@ app.get("/items", async (req, res) => {
     }
   });
   
-app.post("/items", async (req, res) => {
+app.post("/cars", async (req, res) => {
     const title = req.body.title.trim();
+    const url = req.body.url.trim();
+    const price = req.body.price.trim();
+    const numberPlate = req.body.numberPlate.trim();
+
     const cleanTitle = mysql.escape(title).replaceAll("'","");
+    const cleanUrl = mysql.escape(url).replaceAll("'","");
+    const cleanPrice = +mysql.escape(price).replaceAll("'","");
+    const cleanPlate = mysql.escape(numberPlate).replaceAll("'","");
 
     if (typeof title !== "string" || !title) {
         return res
           .status(400)
-          .send(`Incorrect title provided: ${title}`)
+          .send(`Incorrect car title provided: ${title}`)
           .end();
       }
 
@@ -61,7 +84,7 @@ app.post("/items", async (req, res) => {
       const con = await mysql.createConnection(MYSQL_CONFIG);
 
       const result = await con.execute(
-        `INSERT INTO items (title) VALUES('${cleanTitle}')`
+        `INSERT INTO cars (title, image, price, numberplates) VALUES('${cleanTitle}', '${cleanUrl}', '${cleanPrice}',' ${cleanPlate}')`
       );
        
       await con.end();
@@ -73,7 +96,7 @@ app.post("/items", async (req, res) => {
     }
   });
 
-app.delete("/items/:id", async (req, res) => {
+  app.delete("/cars/:id", async (req, res) => {
     const itemId = req.params.id;
     const cleanId = +mysql.escape(itemId).replaceAll("'","")
 
@@ -88,7 +111,7 @@ app.delete("/items/:id", async (req, res) => {
       const con = await mysql.createConnection(MYSQL_CONFIG);
   
       const result = await con.execute(
-        `DELETE FROM items WHERE id = ${cleanId}`
+        `DELETE FROM cars WHERE id = ${cleanId}`
       );
         
       await con.end();
@@ -111,7 +134,8 @@ app.post("/table", async (req, res) => {
       const con = await mysql.createConnection(MYSQL_CONFIG);
   
       const result = await con.execute(
-        `CREATE table ${name}(id int NOT NULL AUTO_INCREMENT, title varchar(35), PRIMARY KEY (id))`
+        `CREATE table ${name}(
+          id int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), title TEXT, image TEXT, price DECIMAL(10,2), numberplates VARCHAR(10))`
       );
   
       await con.end();
@@ -125,5 +149,5 @@ app.post("/table", async (req, res) => {
   
 
   app.listen(PORT, () => {
-    console.log(`Server is running. Listening on Port: ${PORT}`);
+    console.log(`Backend server is running on Port: ${PORT}`);
   });
