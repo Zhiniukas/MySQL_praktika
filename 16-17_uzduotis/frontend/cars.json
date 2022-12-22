@@ -1,0 +1,51 @@
+[
+  {
+    "id": "1",
+    "title": "Seat",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/106257/venue-exterior-right-front-three-quarter-2.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA123"
+  },
+  {
+    "id": "2",
+    "title": "Reno",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/39276/triber-exterior-right-front-three-quarter-168617.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA153"
+  },
+  {
+    "id": "3",
+    "title": "Reno",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/115135/kiger-exterior-right-front-three-quarter-4.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA126"
+  },
+  {
+    "id": "4",
+    "title": "Renault",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/135523/eeco-exterior-right-front-three-quarter.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA125"
+  },
+  {
+    "id": "5",
+    "title": "Reno",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/39276/triber-exterior-right-front-three-quarter-168617.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA153"
+  },
+  {
+    "id": "6",
+    "title": "Reno",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/115135/kiger-exterior-right-front-three-quarter-4.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA126"
+  },
+  {
+    "id": "7",
+    "title": "Renault",
+    "image": "https://imgd.aeplcdn.com/1056x594/n/cw/ec/135523/eeco-exterior-right-front-three-quarter.jpeg",
+    "price": 124.2,
+    "numberplates": "AAA125"
+  }
+]
