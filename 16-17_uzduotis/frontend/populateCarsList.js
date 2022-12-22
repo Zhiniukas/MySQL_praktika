@@ -8,7 +8,9 @@ const createElementWithParams = (tagName, params) => {
 
 const populateCarsList = (members) => {
   const createMembersList = document.querySelector("#cars-grid");
+  createMembersList.innerHTML = "";
   const elementList = document.createElement("div");
+  createMembersList.append(elementList);
 
   elementList.className = "carList";
 
@@ -40,11 +42,11 @@ const populateCarsList = (members) => {
     img.src = member.image;
     imgdata.append(img);
     rowElement.append(
-      carTitle
-      // carNumberplate,
-      // carPrice,
-      // imgdata,
-      //carDeleteButton
+      carTitle,
+      carNumberplate,
+      carPrice,
+      imgdata,
+      carDeleteButton
     );
     elementList.append(rowElement);
   });

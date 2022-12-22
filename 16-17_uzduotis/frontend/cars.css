@@ -15,41 +15,46 @@
 }
 
 .carDeleteButton {
-  margin: 10px 0;
-  padding: 5px;
-  width: 150px;
-  height: 75px;
-  background-color: #707070;
+  margin: -5px;
+  padding: 20px;
+  width: 300px;
+  height: 70px;
+  background-color: #ececec;
   border: #222;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-weight: bold;
-  font-size: 2em;
-  text-align: center;
-  border-radius: 15px;
+  font-size: 1.1em;
+  text-align: left;
+  border-radius: 5px;
 }
 
 img {
   width: 250px;
-  height: 170px;
-  border-radius: 15px;
+  height: 150px;
+  border-radius: 10px;
+  margin: 20px;
 }
 
 .record {
   width: 300px;
   padding: 5px;
-  background-color: antiquewhite;
-  border: 1px darksalmon solid;
+  background-color: rgb(251, 244, 235);
+
   border-radius: 10px;
   margin: 30px;
 }
 
 .carTitle {
   padding: 10px;
-  font-size: 2em;
+  font-size: 1.5em;
 }
-
-.output-cointainer h1 {
-  color: #fff;
+.carNumberplate {
+  padding: 3px;
+  font-size: 1.2em;
+}
+.carPrice {
+  padding: 3px;
+  font-size: 1em;
 }
 
 .carList {
@@ -57,7 +62,7 @@ img {
   margin: 25px;
   padding: 30px;
   border-radius: 5px;
-  background-color: rgb(184, 172, 172);
+  background-color: rgb(240, 240, 240);
 
   display: grid;
   grid-template-columns: 1fr;
@@ -65,40 +70,24 @@ img {
   row-gap: 15px;
 }
 
-#output {
-  font-size: 1.2em;
-}
-
 /* Tablet */
 @media screen and (min-width: 768px) {
   .record {
-    width: 400px;
+    width: 300px;
   }
 
   .carList {
     grid-template-columns: 1fr 1fr;
-  }
-
-  img {
-    width: 300px;
-    height: 200px;
-    border-radius: 5px;
   }
 }
 
 /* PC screen */
 @media screen and (min-width: 1024px) {
   .record {
-    width: 450px;
+    width: 300px;
   }
 
   .carList {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  img {
-    width: 350px;
-    height: 220px;
-    border-radius: 5px;
   }
 }
