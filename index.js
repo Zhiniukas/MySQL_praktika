@@ -19,11 +19,11 @@ const MYSQL_CONFIG =
 app.get("/items", async (req, res) => {
     const  lenght = req.query.lenght;
 
- let cleanlenght=5; //default SELECT query lenght
+ let cleanLength=5; //default SELECT query lenght
 
- if (lenght) cleanlenght = +mysql.escape(lenght).replaceAll("'","")
+ if (lenght) cleanLength = +mysql.escape(lenght).replaceAll("'","")
   
-    if ( cleanlenght < 0 || Number.isNaN(cleanlenght) || typeof cleanlenght !== "number") {
+    if ( cleanLength < 0 || Number.isNaN(cleanLength) || typeof cleanLength !== "number") {
       return res
         .status(400)
         .send(`Incorrect query lenght provided: ${lenght}`)
@@ -33,13 +33,13 @@ app.get("/items", async (req, res) => {
     try {
       const con = await mysql.createConnection(MYSQL_CONFIG);
   
-      const result = await con.execute(
-        `SELECT * FROM items LIMIT ${cleanlenght}`
-      );
+      const result = (await con.execute(
+        `SELECT * FROM items LIMIT ${cleanLength}`
+      ))[0];
        
       await con.end();
   
-      res.send(result[0]).end();
+      res.send(result).end();
     } catch (err) {
       res.status(500).send(err).end(); 
       return console.error(err);
@@ -93,7 +93,7 @@ app.delete("/items/:id", async (req, res) => {
         
       await con.end();
   
-      res.send(result[0]).end();
+      res.status(202).send(result).end();
     } catch (err) {
       res.status(500).send(err).end(); 
       return console.error(err);
@@ -102,16 +102,20 @@ app.delete("/items/:id", async (req, res) => {
 
 app.post("/table", async (req, res) => {
     const name = req.body?.name.trim();
+    const cleanName = mysql.escape(name).replaceAll("'","")
+
+
+    //to do: pasidaryti escape table kodui
   
-    if (!name) {
-      return res.status(400).send(`Incorrect table name provided: ${name}`).end();
+    if (!cleanName) {
+      return res.status(400).send(`Incorrect table name provided: ${cleanName}`).end();
     }
     
     try {
       const con = await mysql.createConnection(MYSQL_CONFIG);
   
       const result = await con.execute(
-        `CREATE table ${name}(id int NOT NULL AUTO_INCREMENT, title varchar(35), PRIMARY KEY (id))`
+        `CREATE table ${cleanName}(id int NOT NULL AUTO_INCREMENT, title varchar(35), PRIMARY KEY (id))`
       );
   
       await con.end();
@@ -122,7 +126,6 @@ app.post("/table", async (req, res) => {
       return console.error(err);
     }
   });
-  
 
   app.listen(PORT, () => {
     console.log(`Server is running. Listening on Port: ${PORT}`);
