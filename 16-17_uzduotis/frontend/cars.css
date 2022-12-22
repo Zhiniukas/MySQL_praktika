@@ -1,0 +1,104 @@
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+/* Mobile first */
+#car-grid {
+  min-height: 100vh;
+  min-width: calc(100vw - (100vw - 100%));
+  background-color: rgb(189, 189, 189);
+}
+
+.carDeleteButton {
+  margin: 10px 0;
+  padding: 5px;
+  width: 150px;
+  height: 75px;
+  background-color: #707070;
+  border: #222;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  border-radius: 15px;
+}
+
+img {
+  width: 250px;
+  height: 170px;
+  border-radius: 15px;
+}
+
+.record {
+  width: 300px;
+  padding: 5px;
+  background-color: antiquewhite;
+  border: 1px darksalmon solid;
+  border-radius: 10px;
+  margin: 30px;
+}
+
+.carTitle {
+  padding: 10px;
+  font-size: 2em;
+}
+
+.output-cointainer h1 {
+  color: #fff;
+}
+
+.carList {
+  /* width: 80%; */
+  margin: 25px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: rgb(184, 172, 172);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+#output {
+  font-size: 1.2em;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .record {
+    width: 400px;
+  }
+
+  .carList {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  img {
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+  }
+}
+
+/* PC screen */
+@media screen and (min-width: 1024px) {
+  .record {
+    width: 450px;
+  }
+
+  .carList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  img {
+    width: 350px;
+    height: 220px;
+    border-radius: 5px;
+  }
+}

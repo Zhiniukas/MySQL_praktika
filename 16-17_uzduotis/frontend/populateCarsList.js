@@ -1,54 +1,55 @@
-const apiUrl = "http://localhost:5000/cars";
+const createElementWithParams = (tagName, params) => {
+  const element = document.createElement(tagName);
 
-const insertcarTitle = (carTitle) => {
-  const addCar = document.createElement("div");
-  const userName = document.createElement("a");
-  const userDetails = populateDetailsList(carTitle);
+  Object.assign(element, params);
 
-  addCar.className = "carTitle";
-  carUrl.className = "carUrl";
-  carPlace.classname = "carPlate";
-
-  link = document.createTextNode(`${carTitle.name} ${carTitle.surname}`);
-
-  userName.append(link);
-  userName.title = "Delete";
-  userName.href = `${apiUrl}/${carTitle.id}`;
-
-  addCar.append(userName, userDetails);
-  return addCar;
+  return element;
 };
 
-const populateDetailsList = (details) => {
-  const result = document.createElement("div");
+const populateCarsList = (members) => {
+  const createMembersList = document.querySelector("#cars-grid");
+  const elementList = document.createElement("div");
 
-  details.forEach((detail) => {
-    if (detail.key !== "id" || detail.key !== "date") {
-      const fieldName = document.createElement("div");
-      const fieldValue = document.createElement("div");
+  elementList.className = "carList";
 
-      fieldValue.className = "detailsValue";
-      fieldName.className = "detailsField";
-      fieldName.append(detail.key);
-      fieldValue.append(detail.value);
+  members.forEach((member) => {
+    const rowElement = document.createElement("div");
+    const carTitle = createElementWithParams("div", {
+      textContent: member.title,
+    });
+    const carPrice = createElementWithParams("div", {
+      textContent: member.price,
+    });
+    const carNumberplate = createElementWithParams("div", {
+      textContent: member.numberplates,
+    });
+    const imgdata = createElementWithParams("div");
+    const img = document.createElement("img");
+    const carDeleteButton = createElementWithParams("button");
 
-      result.append(fieldName, fieldValue);
-    }
+    carTitle.className = "carTitle";
+    carPrice.className = "carPrice";
+    carNumberplate.className = "carNumberplate";
+    carDeleteButton.className = "carDeleteButton";
+
+    carDeleteButton.setAttribute("id", `${member.id}`);
+    carDeleteButton.append("Delete");
+
+    rowElement.className = "record";
+
+    img.src = member.image;
+    imgdata.append(img);
+    rowElement.append(
+      carTitle
+      // carNumberplate,
+      // carPrice,
+      // imgdata,
+      //carDeleteButton
+    );
+    elementList.append(rowElement);
   });
 
-  return result;
-};
-
-const populateCarsList = (cars) => {
-  console.log(cars);
-  const cardList = document.querySelector("#car-grid");
-  const populatedCards = document.createElement("div");
-
-  cars.forEach(function (car) {
-    populatedCards.append(insertcarTitle(car));
-  });
-
-  cardList.append(populatedCards);
+  createMembersList.append(elementList);
 };
 
 export { populateCarsList };
