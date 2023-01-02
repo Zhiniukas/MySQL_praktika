@@ -1,14 +1,17 @@
 import { populateCarsList } from "./populateCarsList.js";
 
-const ENDPOINT = "cars.json";
+const ENDPOINT = "http://127.0.0.1:5000/cars";
 
 async function getCars(api) {
   try {
-    const response = await fetch(api);
-
-    if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`);
-    }
+    const response = await fetch(api
+         , {
+      method: "GET",
+      headers: {
+        'Access-Control-Allow-Origin': 'origin-list',
+        "Content-Type": "application/json",
+      },
+    });
 
     const result = await response.json();
     return result;

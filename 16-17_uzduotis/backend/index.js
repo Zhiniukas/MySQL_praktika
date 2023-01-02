@@ -56,16 +56,18 @@ app.get("/cars/:id", async (req, res) => {
 });
 
 app.post("/cars", async (req, res) => {
+  console.log(req.body);
   const title = req.body.title.trim();
-  const url = req.body.url.trim();
-  const price = req.body.price.trim();
-  const numberPlate = req.body.numberPlate.trim();
+  const url = req.body.image.trim();
+  const price = req.body.price;
+  const numberPlate = req.body.numberplates.trim();
 
   const cleanTitle = mysql.escape(title).replaceAll("'", "");
   const cleanUrl = mysql.escape(url).replaceAll("'", "");
   const cleanPrice = +mysql.escape(price).replaceAll("'", "");
   const cleanPlate = mysql.escape(numberPlate).replaceAll("'", "");
 
+  console.log(cleanPlate,cleanPrice, cleanTitle, cleanUrl);
   const id = new Date().getTime().toString(36);
   const postDate = new Date().toISOString();
 
