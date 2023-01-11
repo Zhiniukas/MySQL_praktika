@@ -1,6 +1,6 @@
 import { populateCarsList } from "./populateCarsList.js";
 
-const ENDPOINT = "http://127.0.0.1:5000/cars";
+const ENDPOINT = "http://127.0.0.1:5000/cars/";
 
 async function getCars(api) {
   try {
@@ -8,7 +8,6 @@ async function getCars(api) {
          , {
       method: "GET",
       headers: {
-        'Access-Control-Allow-Origin': 'origin-list',
         "Content-Type": "application/json",
       },
     });
