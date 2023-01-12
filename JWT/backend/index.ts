@@ -1,5 +1,5 @@
-// import { config } from "dotenv";
-// config();
+import { config } from "dotenv";
+config();
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -9,7 +9,7 @@ import { signIn } from "./src/modules/signIn";
 import { isLoggedIn } from "./src/utils/isLoggedIn";
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.port || 5001;
 
 app.use(cors(), express.json(), cookieParser());
 

@@ -1,7 +1,11 @@
+//import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { TUserPayload } from "./getHome.js";
 
-const jwtSecret = "slaptazodis"; //reikšmė turi būti nuskaitoma iš dotenv.
+import { TUserPayload } from "./getHome";
+
+//dotenv.config();
+
+const jwtSecret = process.env.jwtSecret; 
 
 export const signIn = (req, res) => {
   const { userName, password } = req.body;

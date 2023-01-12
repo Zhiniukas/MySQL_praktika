@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export type TUserPayload = { userName: string; issuedAt: number };
 
-const jwtSecret = "slaptazodis";
+const jwtSecret = process.env.jwtSecret;
 
 export const getHome = (req, res) => {
 console.log(req.headers.authorization.replace("Bearer ",""));

@@ -1,11 +1,28 @@
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+
+dotenv.config();
+
 export const isLoggedIn = (req, res, next) => {
-    const accessToken = req.headers.authorization;
-    const isAuthorized = accessToken; // TODO: JWT validation
-  console.log(isAuthorized);
-    if (!isAuthorized) {
-     return   res.status(401).send({error:"Unauthorized"}).end();
- //     return next("Unauthorized"); // pateikus argumenta iseina is expresso Router (beveik tas pats kaip app)
+  const accessToken = req.headers.authorization;
+
+  let payload = null;
+
+  if (!accessToken) {
+    return res.status(401).send({ error: "User unauthorised" }).end();
+  }
+
+  try {
+    const jwtSecret = process.env.jwtSecret;
+    payload = jwt.verify(accessToken.replace("Bearer ",""), jwtSecret);
+  } catch (err) {
+    if (err instanceof jwt.JsonWebTokenError) {
+      return res.status(401).send({ error: "User unauthorised" }).end();
     }
-  
-    return next();
-  };
+    return res.status(400).end();
+  }
+
+  res.send(`Welcome ${payload.userName}`);
+  return next();
+};
